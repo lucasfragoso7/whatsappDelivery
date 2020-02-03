@@ -18,5 +18,8 @@ export class ClienteListComponent implements OnInit {
   remove(cliente:Cliente){
 
   }
+  mensagem(){
+
+  }
 
 }
