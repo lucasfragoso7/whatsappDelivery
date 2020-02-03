@@ -1,4 +1,8 @@
+import { Router } from '@angular/router';
+import { Cliente } from './../../models/cliente.model';
+import { ClienteService } from './../../services/cliente.service';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-cliente-detalhe',
@@ -6,10 +10,51 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cliente-detalhe.component.css']
 })
 export class ClienteDetalheComponent implements OnInit {
+  contatosForm: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder, private service: ClienteService, private router:Router) {
+    this.createForm();
+  }
+
+  createForm() {
+    this.contatosForm = this.fb.group({
+      nome: new FormControl(''),
+      contato:new FormControl(''),
+      telefone: new FormControl('')
+
+    });
+  }
+
+  onClickSubmit() {
+    const cliente: Cliente = this.createCliente()
+    this.service.setCliente(cliente);
+    this.router.navigateByUrl('/home')
+
+  }
+  createCliente(): Cliente {
+    let cliente: Cliente = new Cliente();
+
+    cliente.contato = this.contatosForm.controls.contato.value;
+    cliente.nome = this.contatosForm.controls.nome.value;
+    cliente.numeroTelefone = this.contatosForm.controls.telefone.value;
+    return cliente;
+  }
 
   ngOnInit() {
+    if (this.service.existsClienteEdit()) {
+      let cliente: Cliente = this.service.clienteEdit;
+      this.carregarForm(cliente);
+    }
+
+
+  }
+
+  carregarForm(cliente: Cliente) {
+    this.contatosForm.controls.nome.setValue(cliente.nome);
+    this.contatosForm.controls.contato.setValue(cliente.contato);
+    this.contatosForm.controls.telefone.setValue(cliente.numeroTelefone);
+
   }
 
 }
+
