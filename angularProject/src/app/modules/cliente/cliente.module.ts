@@ -17,6 +17,7 @@ import { MensagemDialogComponent } from './components/mensagem-dialog/mensagem-d
 
   ],
   providers: [ClienteService],
-  exports: [ClienteListComponent]
+  exports: [ClienteListComponent],
+  entryComponents:[MensagemDialogComponent]
 })
 export class ClienteModule { }

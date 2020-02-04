@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Cliente } from './../../models/cliente.model';
 import { ClienteService } from './../../services/cliente.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cliente-detalhe',
@@ -12,23 +12,25 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 export class ClienteDetalheComponent implements OnInit {
   contatosForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private service: ClienteService, private router:Router) {
+  constructor(private fb: FormBuilder, private service: ClienteService, private router: Router) {
     this.createForm();
   }
 
   createForm() {
     this.contatosForm = this.fb.group({
-      nome: new FormControl(''),
-      contato:new FormControl(''),
-      telefone: new FormControl('')
+      nome: new FormControl('', [Validators.required]),
+      contato: new FormControl('', [Validators.email, Validators.required]),
+      telefone: new FormControl('', [Validators.required])
 
     });
   }
 
   onClickSubmit() {
-    const cliente: Cliente = this.createCliente()
-    this.service.setCliente(cliente);
-    this.router.navigateByUrl('/home')
+    if (this.contatosForm.valid) {
+      const cliente: Cliente = this.createCliente()
+      this.service.setCliente(cliente);
+      this.router.navigateByUrl('/home')
+    }
 
   }
   createCliente(): Cliente {

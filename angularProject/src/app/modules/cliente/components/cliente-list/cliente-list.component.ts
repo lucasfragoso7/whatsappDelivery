@@ -29,6 +29,7 @@ export class ClienteListComponent implements OnInit {
     this.service.removeCliente(cliente);
     this.carregarClientes()
   }
+
   edit(cliente: Cliente) {
 
     this.service.addClienteEdicao(cliente);
@@ -37,17 +38,25 @@ export class ClienteListComponent implements OnInit {
   }
   mensagem() {
     let dialogRef = this.dialog.open(MensagemDialogComponent, {
-      width: '250px',
+      maxWidth: '700px',
+      maxHeight:'500px',
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      console.log(result);
+
       this.service.setMensagem(result);
     });
 
   }
   novo() {
     this.router.navigateByUrl('/cliente-detalhe')
+
+  }
+
+  enviar(){
 
   }
 

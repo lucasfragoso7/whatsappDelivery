@@ -1,6 +1,4 @@
 import { Injectable, Output } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Cliente } from '../models/cliente.model';
 
 @Injectable({
@@ -11,7 +9,7 @@ export class ClienteService {
     this.mensagem = result
   }
 
-  mensagem:String;
+  mensagem: String;
   clienteEdit: Cliente;
 
   clientes = new Array<Cliente>();
@@ -23,7 +21,7 @@ export class ClienteService {
   }
 
   removeCliente(cliente: Cliente) {
-    this.clientes = this.clientes.filter(function (i) { return i.nome !== cliente.nome; });
+    this.clientes = this.clientes.filter(function (i) { return i.contato !== cliente.contato && i.nome !== cliente.nome && i.numeroTelefone !== cliente.numeroTelefone; });
   }
 
   setCliente(cliente: Cliente) {
@@ -35,6 +33,7 @@ export class ClienteService {
 
   getClientes() {
     return this.clientes;
+
   }
   constructor() { }
 
