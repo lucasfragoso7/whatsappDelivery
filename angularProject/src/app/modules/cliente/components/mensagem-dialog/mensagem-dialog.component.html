@@ -1,9 +1,11 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <input type="text" name="mensagem" id="mensagem">
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+<div class="line_weight">
+
+  <h1 mat-dialog-title>Digite aqui a mensagem que deseja enviar.</h1>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" #mensagem></textarea>
+
+  <div mat-dialog-actions>
+    <button mat-button class="btn btn-secondary" (click)="onNoClick()">Fechar</button>
+    <button mat-button class="btn btn-success" [mat-dialog-close]="mensagem.value" cdkFocusInitial>Salvar</button>
+  </div>
+
 </div>

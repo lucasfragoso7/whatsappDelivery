@@ -37,11 +37,15 @@ export class ClienteListComponent implements OnInit {
   }
   mensagem() {
     let dialogRef = this.dialog.open(MensagemDialogComponent, {
-      width: '250px',
+      maxWidth: '700px',
+      maxHeight:'500px',
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      console.log(result);
+
       this.service.setMensagem(result);
     });
 
