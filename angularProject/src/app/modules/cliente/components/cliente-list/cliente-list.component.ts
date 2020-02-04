@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { Cliente } from './../../models/cliente.model';
@@ -12,22 +12,30 @@ import { element } from 'protractor';
   templateUrl: './cliente-list.component.html',
   styleUrls: ['./cliente-list.component.css']
 })
-export class ClienteListComponent implements OnInit {
-
-  constructor(private router: Router, private service: ClienteService, public dialog: MatDialog) { }
+export class ClienteListComponent implements OnInit, AfterViewInit {
 
   clientes = new Array<Cliente>();
 
+  constructor(private router: Router, private service: ClienteService, public dialog: MatDialog) { }
+
+
   ngOnInit() {
-    this.carregarClientes();
+    if (this.service.clientes.length == 0) {
+      this.service.getClienteBack();
+      this.service.iniciar();
+    } else {
+      this.carregarClientes();
+
+    }
+
   }
-
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.carregarClientes();
+    }, 300);
+  }
   private carregarClientes() {
-    this.service.getClientes().subscribe(res => {
-      this.clientes = res;
-      console.log(res);
-
-    })
+    this.clientes = this.service.getClientes()
   }
 
   remove(cliente: Cliente) {
@@ -62,7 +70,27 @@ export class ClienteListComponent implements OnInit {
   }
 
   enviar() {
+    this.service.postMensagem(this.pegarContatosMarcados());
 
+  }
+
+  pegarContatosMarcados() {
+    let contatos = new Array<String>();
+    this.clientes.forEach(element => {
+      if (element.select) {
+
+        contatos.push(element.contato);
+      }
+    })
+    return contatos;
+  }
+
+  select(cliente: Cliente) {
+    this.clientes.forEach(i => {
+      if (i.contato !== cliente.contato && i.nome !== cliente.nome && i.numero !== cliente.numero) {
+        i.select = !i.select;
+      }
+    })
   }
 
 }

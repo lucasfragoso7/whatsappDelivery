@@ -1,7 +1,7 @@
 <div class="container">
   <div class="d-flex justify-content-between">
     <button class="btn btn-success" (click)="novo()">NOVO</button>
-    <button class="btn btn-primary" (click)="mensagem()">DEFINIR MENSAGEM</button>
+    <button mat-flat-button color="primary" (click)="mensagem()">DEFINIR MENSAGEM</button>
   </div>
   <br>
   <div>
@@ -17,13 +17,17 @@
       </thead>
       <tbody>
         <tr *ngFor="let cliente of clientes">
-          <td><input type="checkbox" name="select" id="select" [checked]="cliente.select"></td>
+          <td><input type="checkbox" name="select" id="select" (click)='select(cliente)' ></td>
           <td>{{cliente.nome}}</td>
           <td>{{cliente.numero}}</td>
           <td>{{cliente.contato }}</td>
           <td>
-            <button class="btn btn-primary" type="submit" (click)='remove(cliente)'>REMOVER</button>
-            <button class="btn btn-primary" type="submit" (click)='edit(cliente)'>EDITAR</button>
+            <button class=  "button-remove" mat-mini-fab color="warn" type="submit" (click)='remove(cliente)'>
+              <mat-icon>clear</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" type="submit" (click)='edit(cliente)'>
+              <mat-icon>edit</mat-icon>
+            </button>
           </td>
         </tr>
       </tbody>
