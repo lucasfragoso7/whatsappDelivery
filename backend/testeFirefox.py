@@ -9,8 +9,7 @@ global contatos
 
 @app.route("/recuperarContatos", methods=['GET'])
 def recuperarContatos():
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    arq = open(dir_path + '/contatos.json', 'r')
+    arq = open('C:/contatos.json', 'r')
     saudacao = json.load(arq)
     response = app.response_class(
         response=json.dumps(saudacao),
@@ -27,20 +26,18 @@ def atualizarJson(listaContatos):
 @app.route("/enviarMensagem", methods=['POST'])
 def enviarMensagens():
     content = request.json
-    for contatoList in content.listaContatos:
+    for contatoList in content['listaContatos']:
         findContato = driver.find_element_by_xpath(f"//input[@class='_2zCfw copyable-text selectable-text']")
         time.sleep(1)
         findContato.send_keys(contatoList)
         time.sleep(1)
         contato_pesquisado = driver.find_element_by_xpath(f"//span[@title='" + contatoList + "']")
-        time.sleep(1)
         contato_pesquisado.click()
-        chat_box = driver.find_element_by_class_name('_13mgZ')
-        time.sleep(1)
+        chat_box = driver.find_element_by_xpath(f"//div[@class='_3u328 copyable-text selectable-text']")
         chat_box.click()
-        chat_box.send_keys(content.mensagem)
-        botao_enviar = driver.find_element_by_xpath("//span[@data-icon='send']")
+        chat_box.send_keys(content['mensagem'])
         time.sleep(1)
+        botao_enviar = driver.find_element_by_xpath(f"//button[@class='_3M-N-']")
         botao_enviar.click()
         time.sleep(1)
     response = app.response_class(
@@ -51,7 +48,7 @@ def enviarMensagens():
 @app.route("/init", methods=['GET'])
 def init():
     global driver
-    driver = webdriver.Chrome()
+    driver = webdriver.Firefox()
     driver.get("https://web.whatsapp.com")
     time.sleep(5)
     response = app.response_class(
