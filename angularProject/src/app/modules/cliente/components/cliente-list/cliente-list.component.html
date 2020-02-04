@@ -1,15 +1,14 @@
-
 <div class="container">
-  <div>
+  <div class="d-flex justify-content-between">
     <button class="btn btn-success" (click)="novo()">NOVO</button>
     <button class="btn btn-primary" (click)="mensagem()">DEFINIR MENSAGEM</button>
-
   </div>
   <br>
-  <div >
+  <div>
     <table class="table table-striped">
       <thead>
         <tr>
+          <th scope="col">SELECIONAR</th>
           <th scope="col">NOME</th>
           <th scope="col">TELEFONE</th>
           <th scope="col">CONTATO</th>
@@ -18,6 +17,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let cliente of clientes">
+          <td><input type="checkbox" name="select" id="select" [checked]="cliente.select"></td>
           <td>{{cliente.nome}}</td>
           <td>{{cliente.numeroTelefone}}</td>
           <td>{{cliente.contato }}</td>
@@ -29,6 +29,7 @@
       </tbody>
     </table>
   </div>
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-success" type="submit" (click)="enviar()"> ENVIAR</button>
+  </div>
 </div>
-
-

@@ -29,6 +29,7 @@ export class ClienteListComponent implements OnInit {
     this.service.removeCliente(cliente);
     this.carregarClientes()
   }
+
   edit(cliente: Cliente) {
 
     this.service.addClienteEdicao(cliente);
@@ -52,6 +53,10 @@ export class ClienteListComponent implements OnInit {
   }
   novo() {
     this.router.navigateByUrl('/cliente-detalhe')
+
+  }
+
+  enviar(){
 
   }
 
