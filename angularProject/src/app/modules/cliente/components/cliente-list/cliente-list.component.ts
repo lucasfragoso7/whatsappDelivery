@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Cliente } from './../../models/cliente.model';
 import { ClienteService } from './../../services/cliente.service';
 import { MensagemDialogComponent } from './../mensagem-dialog/mensagem-dialog.component';
+import { element } from 'protractor';
 
 
 @Component({
@@ -22,7 +23,11 @@ export class ClienteListComponent implements OnInit {
   }
 
   private carregarClientes() {
-    this.clientes = this.service.getClientes();
+    this.service.getClientes().subscribe(res => {
+      this.clientes = res;
+      console.log(res);
+
+    })
   }
 
   remove(cliente: Cliente) {
@@ -39,7 +44,7 @@ export class ClienteListComponent implements OnInit {
   mensagem() {
     let dialogRef = this.dialog.open(MensagemDialogComponent, {
       maxWidth: '700px',
-      maxHeight:'500px',
+      maxHeight: '500px',
 
     });
 
@@ -56,7 +61,7 @@ export class ClienteListComponent implements OnInit {
 
   }
 
-  enviar(){
+  enviar() {
 
   }
 

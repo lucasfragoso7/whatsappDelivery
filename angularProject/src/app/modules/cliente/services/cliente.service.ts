@@ -1,5 +1,8 @@
 import { Injectable, Output } from '@angular/core';
 import { Cliente } from '../models/cliente.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +24,7 @@ export class ClienteService {
   }
 
   removeCliente(cliente: Cliente) {
-    this.clientes = this.clientes.filter(function (i) { return i.contato !== cliente.contato && i.nome !== cliente.nome && i.numeroTelefone !== cliente.numeroTelefone; });
+    this.clientes = this.clientes.filter(function (i) { return i.contato !== cliente.contato && i.nome !== cliente.nome && i.numero !== cliente.numero; });
   }
 
   setCliente(cliente: Cliente) {
@@ -31,11 +34,11 @@ export class ClienteService {
     return this.clienteEdit ? true : false;
   }
 
-  getClientes() {
-    return this.clientes;
+  getClientes(): Observable<Cliente[]> {
+    return this.http.get<Cliente[]>(environment.API_URL + '/recuperarContatos')
 
   }
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
 
 }
