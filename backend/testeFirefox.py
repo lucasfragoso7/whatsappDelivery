@@ -2,27 +2,39 @@ from selenium import webdriver
 import time
 from flask import Flask
 import json
-listaContatos = [{"nomeContato":"Contato 1","numero":"null"},{"nomeContato":"Contato 5","numero":"null"}]
-
 app = Flask(__name__)
-#@app.route("/recuperarContatos")
+
+global contatos
+contatos1 = [{
+  "contato":"Gabriel",
+  "nome": "Gabriel",
+  "numero": "83996554938"
+}, {
+  "contato":"Gabriel2",
+  "nome": "Gabriel2",
+  "numero": "839965549382"
+}]
+
+@app.route("/recuperarContatos", methods=['GET'])
 def recuperarContatos():
-    contatos = open('arquivos/contatos.json').read()
-    return json.loads(contatos)
+    response = app.response_class(
+        response=json.dumps(contatos1),
+        status=200,
+        mimetype='application/json')
+    return response
 
 def atualizarJson(listaContatos):
-    contatos = open('arquivos/contatos.json').read()
+    contatos = open('contatos.json').read()
     contatosLida = recuperarContatos()
-    contatosEscrita = open('arquivos/contatos.json', 'r+')
+    contatosEscrita = open('contatos.json', 'r+')
 
-'''
-#@app.route("/")
-def enviarMensagens(contatos, mensagem):
-    print("entrou aqui")
-    for i in contatos:
-        contato = driver.find_element_by_xpath(f"//input[@class='_2zCfw copyable-text selectable-text']")
+
+
+def enviarMensagens(listContatos, mensagem):
+    for contatoList in listContatos:
+        findContato = driver.find_element_by_xpath(f"//input[@class='_2zCfw copyable-text selectable-text']")
         time.sleep(1)
-        contato.send_keys(i)
+        findContato.send_keys(contatoList)
         time.sleep(1)
         contato_pesquisado = driver.find_element_by_xpath(f"//span[@title='" + i + "']")
         time.sleep(1)
@@ -43,16 +55,14 @@ def enviarMensagens(contatos, mensagem):
         # for i, result in results.iteritems():
         # print("#{}: {} ({})".format(i, result.text, result.get_property("href")))
 
-'''
-@app.route('/teste/<string:mensagem>', methods=['GET'])
-def teste(mensagem):
-    return mensagem
+@app.route("/init", methods=['GET'])
+def init():
+    global driver
+    driver = webdriver.Chrome()
+    driver.get("https://web.whatsapp.com")
+    time.sleep(5)
+    return True
 
-#driver = webdriver.Chrome()
-#driver.get("https://web.whatsapp.com")
-#time.sleep(5)
 if __name__ == "__main__":
     app.run()
-#atualizarJson(listaContatos)
-#enviarMensagens(["Contato 1", "Importante!"], "teste")
 
