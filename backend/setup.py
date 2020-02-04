@@ -3,7 +3,7 @@ setup(
     name = "testeFirefox",
     version = "1.0.0",
     options = {"build_exe": {
-        'packages': ["selenium","time","flask","json"],
+        'packages': ["selenium","time","flask","json","os"],
         'include_msvcr': True,
     }},
       executables = [Executable(
