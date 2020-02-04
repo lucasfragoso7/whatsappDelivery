@@ -53,7 +53,7 @@ export class ClienteService {
       listaContatos: contatos,
       mensagem: this.mensagem
     }
-    this.http.post(environment.API_URL + '/enviarMensagem', object)
+    this.http.post(environment.API_URL + '/enviarMensagem', object).subscribe();
   }
 
   iniciar() {
