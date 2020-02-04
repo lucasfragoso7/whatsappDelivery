@@ -19,7 +19,7 @@
         <tr *ngFor="let cliente of clientes">
           <td><input type="checkbox" name="select" id="select" [checked]="cliente.select"></td>
           <td>{{cliente.nome}}</td>
-          <td>{{cliente.numeroTelefone}}</td>
+          <td>{{cliente.numero}}</td>
           <td>{{cliente.contato }}</td>
           <td>
             <button class="btn btn-primary" type="submit" (click)='remove(cliente)'>REMOVER</button>

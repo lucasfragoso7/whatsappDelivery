@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ClienteService } from './services/cliente.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -13,11 +14,11 @@ import { MensagemDialogComponent } from './components/mensagem-dialog/mensagem-d
 @NgModule({
   declarations: [ClienteDetalheComponent, ClienteListComponent, MensagemDialogComponent],
   imports: [
-    CommonModule, ReactiveFormsModule, MatDialogModule
+    CommonModule, ReactiveFormsModule, MatDialogModule, HttpClientModule
 
   ],
-  providers: [ClienteService],
+  providers: [ClienteService, HttpClient],
   exports: [ClienteListComponent],
-  entryComponents:[MensagemDialogComponent]
+  entryComponents: [MensagemDialogComponent]
 })
 export class ClienteModule { }

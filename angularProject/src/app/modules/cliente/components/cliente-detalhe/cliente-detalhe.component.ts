@@ -38,7 +38,7 @@ export class ClienteDetalheComponent implements OnInit {
 
     cliente.contato = this.contatosForm.controls.contato.value;
     cliente.nome = this.contatosForm.controls.nome.value;
-    cliente.numeroTelefone = this.contatosForm.controls.telefone.value;
+    cliente.numero = this.contatosForm.controls.telefone.value;
     return cliente;
   }
 
@@ -54,7 +54,7 @@ export class ClienteDetalheComponent implements OnInit {
   carregarForm(cliente: Cliente) {
     this.contatosForm.controls.nome.setValue(cliente.nome);
     this.contatosForm.controls.contato.setValue(cliente.contato);
-    this.contatosForm.controls.telefone.setValue(cliente.numeroTelefone);
+    this.contatosForm.controls.telefone.setValue(cliente.numero);
 
   }
 

@@ -1,8 +1,8 @@
 export class Cliente {
-  id: number;
+  id?: number;
   select?:boolean = false;
   nome:String;
   contato: string;
-  numeroTelefone: string;
+  numero: string;
 
 }
