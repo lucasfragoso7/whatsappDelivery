@@ -42,6 +42,8 @@ export class ClienteService {
   getClienteBack() {
     this.http.get<Cliente[]>(environment.API_URL + '/recuperarContatos').subscribe(res => {
       this.clientes = res;
+      console.log(res);
+
     })
   }
   setMensagem(result: any) {

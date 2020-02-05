@@ -32,7 +32,7 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     setTimeout(() => {
       this.carregarClientes();
-    }, 300);
+    }, 3000);
   }
   private carregarClientes() {
     this.clientes = this.service.getClientes()
