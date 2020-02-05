@@ -19,7 +19,7 @@ export class ClienteDetalheComponent implements OnInit {
   createForm() {
     this.contatosForm = this.fb.group({
       nome: new FormControl('', [Validators.required]),
-      contato: new FormControl('', [Validators.email, Validators.required]),
+      contato: new FormControl('', [Validators.required]),
       telefone: new FormControl('', [Validators.required])
 
     });

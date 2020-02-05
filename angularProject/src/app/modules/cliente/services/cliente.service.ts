@@ -8,14 +8,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ClienteService {
-  setMensagem(result: any) {
-    this.mensagem = result
-  }
+
+
 
   mensagem: String;
   clienteEdit: Cliente;
 
   clientes = new Array<Cliente>();
+
+  constructor(private http: HttpClient) { }
 
   addClienteEdicao(cliente: Cliente) {
     this.clienteEdit = cliente;
@@ -29,16 +30,36 @@ export class ClienteService {
 
   setCliente(cliente: Cliente) {
     this.clientes.push(cliente)
+    this.clienteEdit = null;
   }
   existsClienteEdit(): boolean {
     return this.clienteEdit ? true : false;
   }
 
-  getClientes(): Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(environment.API_URL + '/recuperarContatos')
-
+  getClientes(): Cliente[] {
+    return this.clientes;
   }
-  constructor(private http: HttpClient) { }
+  getClienteBack() {
+    this.http.get<Cliente[]>(environment.API_URL + '/recuperarContatos').subscribe(res => {
+      this.clientes = res;
+      console.log(res);
 
+    })
+  }
+  setMensagem(result: any) {
+    this.mensagem = result
+  }
+
+  postMensagem(contatos: String[]) {
+    let object = {
+      listaContatos: contatos,
+      mensagem: this.mensagem
+    }
+    this.http.post(environment.API_URL + '/enviarMensagem', object).subscribe();
+  }
+
+  iniciar() {
+    this.http.get(environment.API_URL + '/init').subscribe();
+  }
 
 }
