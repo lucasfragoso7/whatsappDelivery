@@ -77,7 +77,7 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
   pegarContatosMarcados() {
     let contatos = new Array<String>();
     this.clientes.forEach(element => {
-      if (element.select) {
+      if (!element.select) {
 
         contatos.push(element.contato);
       }

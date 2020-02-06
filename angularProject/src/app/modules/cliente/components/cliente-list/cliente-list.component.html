@@ -17,12 +17,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let cliente of clientes">
-          <td><input type="checkbox" name="select" id="select" (click)='select(cliente)' ></td>
+          <td>
+            <mat-checkbox color="primary" class="example-margin colo"  (click)="select(cliente)"></mat-checkbox>
+          </td>
           <td>{{cliente.nome}}</td>
           <td>{{cliente.numero}}</td>
           <td>{{cliente.contato }}</td>
           <td>
-            <button class=  "button-remove" mat-mini-fab color="warn" type="submit" (click)='remove(cliente)'>
+            <button class="button-remove" mat-mini-fab color="warn" type="submit" (click)='remove(cliente)'>
               <mat-icon>clear</mat-icon>
             </button>
             <button mat-mini-fab color="primary" type="submit" (click)='edit(cliente)'>
