@@ -70,14 +70,19 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
   }
 
   enviar() {
-    this.service.postMensagem(this.pegarContatosMarcados());
+    if(!this.service.mensagem){
+      alert(`Por favor, definir mensagem!`)
+    }else{
+      this.service.postMensagem(this.pegarContatosMarcados());
+
+    }
 
   }
 
   pegarContatosMarcados() {
     let contatos = new Array<String>();
     this.clientes.forEach(element => {
-      if (element.select) {
+      if (!element.select) {
 
         contatos.push(element.contato);
       }
