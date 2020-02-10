@@ -27,8 +27,8 @@ def atualizarJson(listaContatos):
 def enviarMensagens():
     content = request.json
     for contatoList in content['listaContatos']:
-        driver.get("https://web.whatsapp.com/send?phone=+5583" + contatoList)
-        time.sleep(10)
+        driver.get("https://web.whatsapp.com/send?phone=+55" + contatoList)
+        time.sleep(5)
         chat_box = driver.find_element_by_xpath(f"//div[@class='_3u328 copyable-text selectable-text']")
         chat_box.click()
         chat_box.send_keys(content['mensagem'])

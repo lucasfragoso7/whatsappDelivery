@@ -1,11 +1,11 @@
 [
   {
-    "contato": "Contato 1",
+    "email": "Contato 1",
     "nome": "Gabriel",
     "numero": "83996554938"
   },
   {
-    "contato": "Importante!",
+    "email": "Importante!",
     "nome": "Gabriel2",
     "numero": "839965549382"
   }
