@@ -84,7 +84,7 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
     this.clientes.forEach(element => {
       if (!element.select) {
 
-        contatos.push(element.contato);
+        contatos.push(element.numero);
       }
     })
     return contatos;
@@ -92,7 +92,7 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
 
   select(cliente: Cliente) {
     this.clientes.forEach(i => {
-      if (i.contato !== cliente.contato && i.nome !== cliente.nome && i.numero !== cliente.numero) {
+      if (i.email !== cliente.email && i.nome !== cliente.nome && i.numero !== cliente.numero) {
         i.select = !i.select;
       }
     })

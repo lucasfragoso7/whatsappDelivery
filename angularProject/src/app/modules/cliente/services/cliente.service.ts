@@ -25,7 +25,7 @@ export class ClienteService {
   }
 
   removeCliente(cliente: Cliente) {
-    this.clientes = this.clientes.filter(function (i) { return i.contato !== cliente.contato && i.nome !== cliente.nome && i.numero !== cliente.numero; });
+    this.clientes = this.clientes.filter(function (i) { return i.email !== cliente.email && i.nome !== cliente.nome && i.numero !== cliente.numero; });
   }
 
   setCliente(cliente: Cliente) {
