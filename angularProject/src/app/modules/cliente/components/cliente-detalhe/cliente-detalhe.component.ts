@@ -19,7 +19,7 @@ export class ClienteDetalheComponent implements OnInit {
   createForm() {
     this.contatosForm = this.fb.group({
       nome: new FormControl('', [Validators.required]),
-      contato: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       telefone: new FormControl('', [Validators.required])
 
     });
@@ -36,7 +36,7 @@ export class ClienteDetalheComponent implements OnInit {
   createCliente(): Cliente {
     let cliente: Cliente = new Cliente();
 
-    cliente.contato = this.contatosForm.controls.contato.value;
+    cliente.email = this.contatosForm.controls.email.value;
     cliente.nome = this.contatosForm.controls.nome.value;
     cliente.numero = this.contatosForm.controls.telefone.value;
     return cliente;
@@ -53,7 +53,7 @@ export class ClienteDetalheComponent implements OnInit {
 
   carregarForm(cliente: Cliente) {
     this.contatosForm.controls.nome.setValue(cliente.nome);
-    this.contatosForm.controls.contato.setValue(cliente.contato);
+    this.contatosForm.controls.email.setValue(cliente.email);
     this.contatosForm.controls.telefone.setValue(cliente.numero);
 
   }

@@ -1,7 +1,7 @@
 export class Cliente {
   select?:boolean = false;
   nome:String;
-  contato: string;
+  email: string;
   numero: string;
 
 }

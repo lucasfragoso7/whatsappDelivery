@@ -11,18 +11,18 @@
           <th scope="col">SELECIONAR</th>
           <th scope="col">NOME</th>
           <th scope="col">TELEFONE</th>
-          <th scope="col">CONTATO</th>
+          <th scope="col">EMAIL</th>
           <th scope="col">OPÇÃO</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let cliente of clientes">
-          <td>
+          <td class="select">
             <mat-checkbox color="primary" class="example-margin colo"  (click)="select(cliente)"></mat-checkbox>
           </td>
           <td>{{cliente.nome}}</td>
           <td>{{cliente.numero}}</td>
-          <td>{{cliente.contato }}</td>
+          <td>{{cliente.email }}</td>
           <td>
             <button class="button-remove" mat-mini-fab color="warn" type="submit" (click)='remove(cliente)'>
               <mat-icon>clear</mat-icon>
