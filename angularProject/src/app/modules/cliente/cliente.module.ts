@@ -11,6 +11,7 @@ import { ClienteDetalheComponent } from './components/cliente-detalhe/cliente-de
 import { ClienteListComponent } from './components/cliente-list/cliente-list.component';
 import { MensagemDialogComponent } from './components/mensagem-dialog/mensagem-dialog.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -26,7 +27,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatIconModule,
     HttpClientModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    NgxPaginationModule,
+
   ],
   providers: [ClienteService, HttpClient,],
   exports: [ClienteListComponent],
