@@ -3,6 +3,8 @@ import { Cliente } from '../models/cliente.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,8 @@ export class ClienteService {
   clienteEdit: Cliente;
 
   clientes = new Array<Cliente>();
+  pag : Number = 1 ;
+  contador : Number = 5;
 
   constructor(private http: HttpClient) { }
 

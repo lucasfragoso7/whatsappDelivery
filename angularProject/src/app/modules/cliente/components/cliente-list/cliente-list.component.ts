@@ -5,6 +5,7 @@ import { Cliente } from './../../models/cliente.model';
 import { ClienteService } from './../../services/cliente.service';
 import { MensagemDialogComponent } from './../mensagem-dialog/mensagem-dialog.component';
 import { element } from 'protractor';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { element } from 'protractor';
 export class ClienteListComponent implements OnInit, AfterViewInit {
 
   clientes = new Array<Cliente>();
+  pag : Number = 1 ;
+  contador : Number = 5;
 
   constructor(private router: Router, private service: ClienteService, public dialog: MatDialog) { }
 

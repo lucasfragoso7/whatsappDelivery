@@ -16,10 +16,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let cliente of clientes">
+        <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
           <td class="select">
             <mat-checkbox color="primary" class="example-margin colo"  (click)="select(cliente)"></mat-checkbox>
           </td>
+          <td>{{i}}</td>
           <td>{{cliente.nome}}</td>
           <td>{{cliente.numero}}</td>
           <td>{{cliente.email }}</td>
@@ -33,6 +34,7 @@
           </td>
         </tr>
       </tbody>
+      <pagination-controls (pageChange)="paginaAtual = $event"></pagination-controls>
     </table>
   </div>
   <div class="d-flex justify-content-end">

@@ -1,3 +1,3 @@
-SETX chormeDriver "C:\chormeDriver" -m
+SETX chromeDriver "C:\chromeDriver" -m
 
-SETX PATH "%PATH%;c:\chormeDriver" -m
+SETX PATH %chromeDriver% -m
