@@ -16,11 +16,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
+        <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: contador, currentPage: paginaAtual };">
           <td class="select">
-            <mat-checkbox color="primary" class="example-margin colo"  (click)="select(cliente)"></mat-checkbox>
+            <mat-checkbox color="primary" class="example-margin colo" (click)="select(cliente)"></mat-checkbox>
           </td>
-          <td>{{i}}</td>
           <td>{{cliente.nome}}</td>
           <td>{{cliente.numero}}</td>
           <td>{{cliente.email }}</td>
