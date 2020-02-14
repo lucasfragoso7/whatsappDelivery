@@ -7,7 +7,7 @@ setup(
         'include_msvcr': True,
     }},
       executables = [Executable(
-                   script='testeFirefox.py',
+                   script='moveZapRest.py',
                    base=None,
                    icon=None
                    )
