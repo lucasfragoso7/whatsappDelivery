@@ -1,13 +1,13 @@
 from cx_Freeze import setup, Executable
 setup(
-    name = "testeFirefox",
+    name = "MoveZap",
     version = "1.0.0",
     options = {"build_exe": {
-        'packages': ["selenium","time","flask","json","os"],
+        'packages': ["selenium","time","flask","json","os","random"],
         'include_msvcr': True,
     }},
       executables = [Executable(
-                   script='testeFirefox.py',
+                   script='moveZapRest.py',
                    base=None,
                    icon=None
                    )
