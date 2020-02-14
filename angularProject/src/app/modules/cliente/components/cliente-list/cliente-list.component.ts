@@ -16,8 +16,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 export class ClienteListComponent implements OnInit, AfterViewInit {
 
   clientes = new Array<Cliente>();
-  pag : Number = 1 ;
-  contador : Number = 5;
+  pag: Number = 1;
+  contador: Number = 5;
 
   constructor(private router: Router, private service: ClienteService, public dialog: MatDialog) { }
 
@@ -54,8 +54,8 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
   }
   mensagem() {
     let dialogRef = this.dialog.open(MensagemDialogComponent, {
-      maxWidth: '700px',
-      maxHeight: '500px',
+      maxWidth: '80%',
+      maxHeight: '70%',
 
     });
 
@@ -73,9 +73,9 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
   }
 
   enviar() {
-    if(!this.service.mensagem){
+    if (!this.service.mensagem) {
       alert(`Por favor, definir mensagem!`)
-    }else{
+    } else {
       this.service.postMensagem(this.pegarContatosMarcados());
 
     }
@@ -101,4 +101,8 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
     })
   }
 
+  salvarContatos() {
+    this.service.enviarContatos(this.clientes).subscribe();
+
+  }
 }
