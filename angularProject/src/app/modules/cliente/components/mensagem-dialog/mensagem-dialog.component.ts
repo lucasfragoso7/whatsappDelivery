@@ -1,3 +1,4 @@
+import { ClienteService } from './../../services/cliente.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -8,10 +9,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class MensagemDialogComponent implements OnInit {
   mensagens = new Array<String>();
+
   constructor(
     public dialogRef: MatDialogRef<MensagemDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private service: ClienteService) { }
+
+
   ngOnInit(): void {
+    if (this.service.mensagens.length) {
+      this.mensagens = this.service.mensagens;
+    }
   }
 
   onNoClick(): void {

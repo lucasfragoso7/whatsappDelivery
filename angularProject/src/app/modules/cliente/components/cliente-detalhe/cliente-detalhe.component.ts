@@ -20,14 +20,20 @@ export class ClienteDetalheComponent implements OnInit {
     this.contatosForm = this.fb.group({
       nome: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      telefone: new FormControl('', [Validators.required])
+      telefone: new FormControl('', [Validators.required]),
+      cidade: new FormControl('', [Validators.required])
 
     });
   }
 
   onClickSubmit() {
     if (this.contatosForm.valid) {
-      const cliente: Cliente = this.createCliente()
+      let cliente: Cliente;
+      if (this.service.clienteEdit) {
+        cliente = this.editCliente();
+      } else {
+        cliente = this.createCliente();
+      }
       this.service.setCliente(cliente);
       this.router.navigateByUrl('/home')
     }
@@ -39,6 +45,16 @@ export class ClienteDetalheComponent implements OnInit {
     cliente.email = this.contatosForm.controls.email.value;
     cliente.nome = this.contatosForm.controls.nome.value;
     cliente.numero = this.contatosForm.controls.telefone.value;
+    return cliente;
+  }
+
+  editCliente(): Cliente {
+    let cliente = this.service.clienteEdit;
+    cliente.email = this.contatosForm.controls.email.value;
+    cliente.nome = this.contatosForm.controls.nome.value;
+    cliente.numero = this.contatosForm.controls.telefone.value;
+    cliente.cidade = this.contatosForm.controls.cidade.value;
+
     return cliente;
   }
 
@@ -55,6 +71,8 @@ export class ClienteDetalheComponent implements OnInit {
     this.contatosForm.controls.nome.setValue(cliente.nome);
     this.contatosForm.controls.email.setValue(cliente.email);
     this.contatosForm.controls.telefone.setValue(cliente.numero);
+    this.contatosForm.controls.cidade.setValue(cliente.cidade);
+
 
   }
 
