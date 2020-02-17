@@ -7,14 +7,24 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./mensagem-dialog.component.css']
 })
 export class MensagemDialogComponent implements OnInit {
-  ngOnInit(): void {
-  }
-
+  mensagens = new Array<String>();
   constructor(
     public dialogRef: MatDialogRef<MensagemDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
+  ngOnInit(): void {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  remove(mensagem: String) {
+    this.mensagens = this.mensagens.filter(element => element != mensagem);
+  }
+
+  add(mensagem: String) {
+    if (mensagem.trim()) {
+      this.mensagens.push(mensagem);
+    }
   }
 }
