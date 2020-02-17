@@ -9,12 +9,8 @@ import { Cliente } from './../models/cliente.model';
 })
 export class ClienteService {
 
-  mensagem: String;
+  mensagens = new Array<String>()
   clienteEdit: Cliente;
-
-  clientes = new Array<Cliente>();
-  pag: Number = 1;
-  contador: Number = 5;
 
   constructor(private http: HttpClient) { }
 
@@ -25,35 +21,32 @@ export class ClienteService {
   }
 
   removeCliente(cliente: Cliente) {
-    this.clientes = this.clientes.filter(function (i) { return i.email !== cliente.email && i.nome !== cliente.nome && i.numero !== cliente.numero; });
+    this.http.delete<Cliente[]>(environment.API_URL + '/apagarContato'+ "/" + cliente.id);
+
   }
 
   setCliente(cliente: Cliente) {
-    this.clientes.push(cliente)
     this.clienteEdit = null;
+    this.http.post<Cliente[]>(environment.API_URL + '/salvarContato ', cliente);
   }
+
   existsClienteEdit(): boolean {
-    return this.clienteEdit ? true : false;
+    return this.clienteEdit !== null;
   }
 
-  getClientes(): Cliente[] {
-    return this.clientes;
-  }
+
   getClienteBack() {
-    this.http.get<Cliente[]>(environment.API_URL + '/recuperarContatos').subscribe(res => {
-      this.clientes = res;
-      console.log(res);
-
-    })
+    return this.http.get<Cliente[]>(environment.API_URL + '/recuperarContatos')
   }
-  setMensagem(result: any) {
-    this.mensagem = result
+
+  setMensagem(result: String[]) {
+    this.mensagens = result;
   }
 
   postMensagem(contatos: String[]) {
     let object = {
       listaContatos: contatos,
-      mensagem: this.mensagem
+      mensagem: this.mensagens
     }
     this.http.post(environment.API_URL + '/enviarMensagem', object).subscribe();
   }
@@ -62,8 +55,6 @@ export class ClienteService {
     this.http.get(environment.API_URL + '/init').subscribe();
   }
 
-  enviarContatos(contatos: Cliente[]) {
-    return this.http.post(environment.API_URL + '/contatos', contatos)
-  }
+
 
 }

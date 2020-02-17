@@ -8,19 +8,18 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">SELECIONAR</th>
           <th scope="col">NOME</th>
+          <th scope="col">CIDADE</th>
           <th scope="col">TELEFONE</th>
           <th scope="col">EMAIL</th>
           <th scope="col">OPÇÃO</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let cliente of clientes | paginate: { itemsPerPage: contador, currentPage: paginaAtual };">
-          <td class="select">
-            <mat-checkbox color="primary" class="example-margin colo" (click)="select(cliente)"></mat-checkbox>
-          </td>
+        <tr scope="row"
+          *ngFor="let cliente of clientes | paginate: { itemsPerPage: contador, currentPage: paginaAtual };">
           <td>{{cliente.nome}}</td>
+          <td>{{cliente.cidade}}</td>
           <td>{{cliente.numero}}</td>
           <td>{{cliente.email }}</td>
           <td>
@@ -37,7 +36,6 @@
     </table>
   </div>
   <div class="d-flex justify-content-end">
-    <button class="btn btn-primary" type="submit" disabled (click)="salvarContatos()"> SALVAR CONTATOS</button>
 
     <button class="btn btn-success" type="submit" (click)="enviar()"> ENVIAR</button>
   </div>

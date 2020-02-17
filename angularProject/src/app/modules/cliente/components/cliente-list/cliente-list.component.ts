@@ -16,29 +16,26 @@ import { NgxPaginationModule } from 'ngx-pagination';
 export class ClienteListComponent implements OnInit, AfterViewInit {
 
   clientes = new Array<Cliente>();
-  pag: Number = 1;
-  contador: Number = 5;
+  pag = 1;
+  contador = 5;
 
   constructor(private router: Router, private service: ClienteService, public dialog: MatDialog) { }
 
 
   ngOnInit() {
-    if (this.service.clientes.length == 0) {
-      this.service.getClienteBack();
+    if (this.clientes.length == 0) {
       this.service.iniciar();
-    } else {
-      this.carregarClientes();
-
     }
-
   }
+
   ngAfterViewInit() {
     setTimeout(() => {
       this.carregarClientes();
     }, 3000);
   }
+
   private carregarClientes() {
-    this.clientes = this.service.getClientes()
+    this.service.getClienteBack().subscribe(res => this.clientes = res);
   }
 
   remove(cliente: Cliente) {
@@ -47,22 +44,17 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
   }
 
   edit(cliente: Cliente) {
-
     this.service.addClienteEdicao(cliente);
     this.router.navigateByUrl('/cliente-detalhe')
-
   }
   mensagem() {
     let dialogRef = this.dialog.open(MensagemDialogComponent, {
-      maxWidth: '80%',
-      maxHeight: '70%',
+      width: '70%',
+      maxHeight: '60%',
 
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-
       this.service.setMensagem(result);
     });
 
@@ -73,7 +65,7 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
   }
 
   enviar() {
-    if (!this.service.mensagem) {
+    if (!this.service.mensagens.length) {
       alert(`Por favor, definir mensagem!`)
     } else {
       this.service.postMensagem(this.pegarContatosMarcados());
@@ -84,8 +76,8 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
 
   pegarContatosMarcados() {
     let contatos = new Array<String>();
-    this.clientes.forEach(element => {
-      if (!element.select) {
+    this.clientes.forEach((element: Cliente, index) => {
+      if (index > (this.pag - 1) * this.contador && index < this.pag * this.contador - 1) {
 
         contatos.push(element.numero);
       }
@@ -93,16 +85,5 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
     return contatos;
   }
 
-  select(cliente: Cliente) {
-    this.clientes.forEach(i => {
-      if (i.email !== cliente.email && i.nome !== cliente.nome && i.numero !== cliente.numero) {
-        i.select = !i.select;
-      }
-    })
-  }
 
-  salvarContatos() {
-    this.service.enviarContatos(this.clientes).subscribe();
-
-  }
 }

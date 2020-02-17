@@ -2,12 +2,14 @@
   <form [formGroup]="contatosForm" class="form-group">
     <input class="form-control" type="text" name="nome" placeholder="nome" formControlName="nome" #nome>
     <br />
+    <input class="form-control" type="text" name="cidade" placeholder="cidade" formControlName="cidade" #cidade>
+    <br />
     <input class="form-control" type="text" name="email" placeholder="email" formControlName="email" #contato>
     <br />
     <input class="form-control" type="text" name="telefone" placeholder="telefone" formControlName="telefone" #telefone>
     <br />
     <div class="d-flex justify-content-end">
-      <input type="submit" value="SALVAR " class="btn btn-success" (click)="onClickSubmit(nome.value, contato.value)">
+      <input type="submit" value="SALVAR " class="btn btn-success" (click)="onClickSubmit()">
     </div>
   </form>
 </div>
