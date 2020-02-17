@@ -3,7 +3,7 @@ setup(
     name = "MoveZap",
     version = "1.0.0",
     options = {"build_exe": {
-        'packages': ["selenium","time","flask","json","os","random"],
+        'packages': ["selenium","time", "sqlite3", "flask","json","random"],
         'include_msvcr': True,
     }},
       executables = [Executable(

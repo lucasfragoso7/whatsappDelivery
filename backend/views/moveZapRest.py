@@ -1,29 +1,79 @@
 from selenium import webdriver
 import time
-import os
-import service.MoveZapService as moveZapService
+import sqlite3
 from flask import Flask, request
 import json
 import random
-app = Flask(__name__)
-
 global contatos
+
+app = Flask(__name__)
+if __name__ == "__main__":
+    app.run()
 
 @app.route("/recuperarContatos", methods=['GET'])
 def recuperarContatos():
-    arq = open('C:/contatos.json', 'r', encoding="utf8")
-    saudacao = json.load(arq)
+    listContatos = {}
+    listaContatosJson = []
+    connBd = sqlite3.connect('C:/bancoDeDados.db')
+    for contato in connBd.execute('select * from contatos'):
+        listContatos = {"nome": contato[1], "id": contato[0],
+                        "telefone": contato[2],
+                        "cidade": contato[3], "email": contato[4]}
+        listaContatosJson.append(listContatos)
     response = app.response_class(
-        response=json.dumps(saudacao),
+        response=json.dumps(listaContatosJson),
         status=200,
         mimetype='application/json')
     return response
 
-def atualizarJson(listaContatos):
-    contatos = open('contatos.json').read()
-    contatosLida = recuperarContatos()
-    contatosEscrita = open('contatos.json', 'r+')
+@app.route("/salvarContato", methods=['POST'])
+def salvarContato():
+    connBd = sqlite3.connect('bancoDeDados.db')
+    content = request.json
+    if('id' not in content):
+       salvarNovoContato(content, connBd)
+    else:
+        editarContato(content, connBd)
+    response = app.response_class(
+            status=200,
+            mimetype='application/json')
+    return response
 
+def editarContato(content, connBd):
+    aspas = "'"
+    virgula = ","
+    nome = content['nome']
+    telefone = content['telefone']
+    email = content['email']
+    cidade = content['cidade']
+    id = str(content['id'])
+    connBd.execute('update contatos set nome_contato = '
+                   + aspas +  nome + aspas + virgula +
+                    ' telefone_contato = ' +
+                    aspas + telefone + aspas + virgula +
+                    ' cidade_contato = ' +
+                    aspas + cidade + aspas + virgula +
+                   ' email_contato = ' +
+                    aspas + email + aspas +
+                   ' where id_contato =' + aspas + id + aspas)
+    connBd.commit()
+
+
+
+def salvarNovoContato(content, connBd):
+    aspas = "'"
+    virgula = ","
+    nome = content['nome']
+    telefone = content['telefone']
+    email = content['email']
+    cidade = content['cidade']
+    connBd.execute('select * from contatos')
+    connBd.execute('insert into contatos (nome_contato, telefone_contato, cidade_contato, email_contato) values ( ' + aspas + nome
+                   + aspas + virgula + aspas + telefone
+                   + aspas + virgula + aspas +
+                   cidade + aspas + virgula +
+                   aspas + email + aspas + ')')
+    connBd.commit()
 
 @app.route("/enviarMensagem", methods=['POST'])
 def enviarMensagens():
@@ -58,5 +108,3 @@ def init():
         status=200,
         mimetype='application/json')
     return response
-if __name__ == "__main__":
-    app.run()
