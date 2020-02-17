@@ -1,9 +1,7 @@
-import { Injectable, Output } from '@angular/core';
-import { Cliente } from '../models/cliente.model';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { Cliente } from './../models/cliente.model';
 
 
 @Injectable({
@@ -11,14 +9,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class ClienteService {
 
-
-
   mensagem: String;
   clienteEdit: Cliente;
 
   clientes = new Array<Cliente>();
-  pag : Number = 1 ;
-  contador : Number = 5;
+  pag: Number = 1;
+  contador: Number = 5;
 
   constructor(private http: HttpClient) { }
 
@@ -64,6 +60,10 @@ export class ClienteService {
 
   iniciar() {
     this.http.get(environment.API_URL + '/init').subscribe();
+  }
+
+  enviarContatos(contatos: Cliente[]) {
+    return this.http.post(environment.API_URL + '/contatos', contatos)
   }
 
 }

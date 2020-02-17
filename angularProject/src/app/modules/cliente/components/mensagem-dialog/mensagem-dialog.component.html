@@ -1,11 +1,39 @@
 <div class="line_weight">
 
-  <h1 mat-dialog-title>Digite aqui a mensagem que deseja enviar.</h1>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" #mensagem></textarea>
+  <h1 mat-dialog-title>Digite aqui as mensagens que deseja enviar.</h1>
+  <div>
+    <div class="d-flex justify-content-between">
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" #msg></textarea>
+
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="add(msg.value)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">MENSAGENS</th>
+        <th scope="col">OPÇÃO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mensagem of mensagens">
+        <td> <textarea class="form-control" rows="3">{{mensagem}}</textarea>
+        </td>
+        <td><button class="button-remove" mat-mini-fab color="warn" type="submit" (click)='remove(mensagem)'>
+            <mat-icon>clear</mat-icon>
+          </button></td>
+      </tr>
+    </tbody>
+  </table>
 
   <div mat-dialog-actions class="d-flex justify-content-between">
     <button class="btn btn-secondary" (click)="onNoClick()">Fechar</button>
-    <button class="btn btn-success" [mat-dialog-close]="mensagem.value">Salvar</button>
+    <button class="btn btn-success" [mat-dialog-close]="mensagens">Salvar</button>
   </div>
 
 </div>
