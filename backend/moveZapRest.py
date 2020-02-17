@@ -20,20 +20,35 @@ def recuperarContatos():
                         "telefone": contato[2],
                         "cidade": contato[3], "email": contato[4]}
         listaContatosJson.append(listContatos)
+    connBd.close()
     response = app.response_class(
         response=json.dumps(listaContatosJson),
         status=200,
         mimetype='application/json')
     return response
 
+@app.route("/apagarContato/<id>", methods=['DELETE'])
+def apagarContato(id):
+    id = str(id)
+    aspas = "'"
+    connBd = sqlite3.connect('C:/bancoDeDados.db')
+    connBd.execute('delete from contatos where id_contato = ' + aspas + id + aspas)
+    connBd.commit()
+    connBd.close()
+    response = app.response_class(
+            status=200,
+            mimetype='application/json')
+    return response
+
 @app.route("/salvarContato", methods=['POST'])
 def salvarContato():
-    connBd = sqlite3.connect('bancoDeDados.db')
+    connBd = sqlite3.connect('C:/bancoDeDados.db')
     content = request.json
     if('id' not in content):
        salvarNovoContato(content, connBd)
     else:
         editarContato(content, connBd)
+    connBd.close()
     response = app.response_class(
             status=200,
             mimetype='application/json')
