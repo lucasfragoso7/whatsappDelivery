@@ -58,9 +58,6 @@ export class ClienteService {
 
   setFlagArquivos(flagArquivos) {
     this.flagArquivos = flagArquivos
-    console.log('====================================');
-    console.log(this.flagArquivos);
-    console.log('====================================');
   }
 
 
