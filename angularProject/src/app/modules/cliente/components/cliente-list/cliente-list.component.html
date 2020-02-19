@@ -35,8 +35,9 @@
       <pagination-controls (pageChange)="paginaAtual = $event"></pagination-controls>
     </table>
   </div>
-  <div class="d-flex justify-content-end">
+  <div class="d-flex justify-content-between">
+    <button mat-flat-button color="primary"(click)="inciarWhatsApp()" [disabled]="!flagEnviarContatos">INICIAR WHATSAPPWEB</button>
 
-    <button class="btn btn-success" type="submit" (click)="enviar()"> ENVIAR</button>
+    <button class="btn btn-success" type="submit" (click)="enviar()" [disabled]="flagEnviarContatos"> ENVIAR</button>
   </div>
 </div>

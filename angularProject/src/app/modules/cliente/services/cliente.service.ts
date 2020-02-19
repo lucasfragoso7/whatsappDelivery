@@ -8,7 +8,7 @@ import { Cliente } from './../models/cliente.model';
   providedIn: 'root'
 })
 export class ClienteService {
-
+  flagArquivos: false;
   mensagens = new Array<String>()
   clienteEdit: Cliente;
 
@@ -21,7 +21,7 @@ export class ClienteService {
   }
 
   removeCliente(cliente: Cliente) {
-    this.http.delete<Cliente[]>(environment.API_URL + '/apagarContato'+ "/" + cliente.id);
+    this.http.delete<Cliente[]>(environment.API_URL + '/apagarContato' + "/" + cliente.id);
 
   }
 
@@ -46,7 +46,8 @@ export class ClienteService {
   postMensagem(contatos: String[]) {
     let object = {
       listaContatos: contatos,
-      mensagem: this.mensagens
+      mensagem: this.mensagens,
+      temArquivo: this.flagArquivos,
     }
     this.http.post(environment.API_URL + '/enviarMensagem', object).subscribe();
   }
@@ -55,6 +56,12 @@ export class ClienteService {
     this.http.get(environment.API_URL + '/init').subscribe();
   }
 
+  setFlagArquivos(flagArquivos) {
+    this.flagArquivos = flagArquivos
+    console.log('====================================');
+    console.log(this.flagArquivos);
+    console.log('====================================');
+  }
 
 
 }
