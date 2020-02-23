@@ -95,13 +95,26 @@ def enviarMensagens():
     numeroMensagem = 0
     content = request.json
     for contatoList in content['listaContatos']:
-        numeroMensagem = random.randint(0, (len(content['mensagens']) - 1))
+        numeroMensagem = random.randint(0, (len(content['mensagem']) - 1))
         driver.get("https://web.whatsapp.com/send?phone=+55" + contatoList)
         time.sleep(8)
+        if content['temArquivo']:
+            try 
+                chat_box = driver.find_element_by_xpath(f"//div[@title='Anexar']")
+                chat_box.click()
+                time.sleep(1)
+                anexar = driver.find_element_by_xpath(f"//input[@type='file']")
+                anexar.send_keys(os.path.abspath("C:/" + content["nomeArquivo"]))
+                time.sleep(2)
+                botaoEnviar = driver.find_element_by_xpath(f"//div[@class='_1g8sv NOJWi']")
+                botaoEnviar.click()
+                time.sleep(2)
+            except:
+                continue
         try:
             chat_box = driver.find_element_by_xpath(f"//div[@class='_3u328 copyable-text selectable-text']")
             chat_box.click()
-            chat_box.send_keys(content['mensagens'][numeroMensagem])
+            chat_box.send_keys(content['mensagem'][numeroMensagem])
         except:
             continue
         time.sleep(1)
