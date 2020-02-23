@@ -35,4 +35,7 @@ export class MensagemDialogComponent implements OnInit {
       this.mensagens.push(mensagem);
     }
   }
+  mudarFlag(flagArquivos:boolean){
+    this.service.setFlagArquivos(flagArquivos);
+  }
 }

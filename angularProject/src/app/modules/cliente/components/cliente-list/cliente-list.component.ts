@@ -18,14 +18,12 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
   clientes = new Array<Cliente>();
   pag = 1;
   contador = 5;
+  flagEnviarContatos:boolean = true;
 
   constructor(private router: Router, private service: ClienteService, public dialog: MatDialog) { }
 
 
   ngOnInit() {
-    if (this.clientes.length == 0) {
-      this.service.iniciar();
-    }
   }
 
   ngAfterViewInit() {
@@ -84,6 +82,9 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
     })
     return contatos;
   }
-
+  inciarWhatsApp() {
+    this.flagEnviarContatos = false;
+    this.service.iniciar();
+  }
 
 }
