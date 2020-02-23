@@ -5,6 +5,7 @@ from flask import Flask, request
 import json
 import random
 global contatos
+import os
 
 app = Flask(__name__)
 if __name__ == "__main__":
@@ -99,7 +100,7 @@ def enviarMensagens():
         driver.get("https://web.whatsapp.com/send?phone=+55" + contatoList)
         time.sleep(8)
         if content['temArquivo']:
-            try 
+            try:
                 chat_box = driver.find_element_by_xpath(f"//div[@title='Anexar']")
                 chat_box.click()
                 time.sleep(1)
