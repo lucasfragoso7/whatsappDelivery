@@ -4,12 +4,12 @@ import sqlite3
 from flask import Flask, request
 import json
 import random
-global contatos
 import os
 
 app = Flask(__name__)
 if __name__ == "__main__":
     app.run()
+global contatos
 
 @app.route("/recuperarContatos", methods=['GET'])
 def recuperarContatos():
