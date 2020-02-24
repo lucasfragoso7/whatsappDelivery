@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ClienteService } from './services/cliente.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'
@@ -27,6 +27,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatIconModule,
     HttpClientModule,
     MatButtonModule,
+    FormsModule,
     MatCheckboxModule,
     NgxPaginationModule,
 

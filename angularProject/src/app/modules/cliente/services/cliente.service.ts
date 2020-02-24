@@ -8,13 +8,16 @@ import { Cliente } from './../models/cliente.model';
   providedIn: 'root'
 })
 export class ClienteService {
-  flagArquivos: false;
+  flagArquivos = false;
+  nomeDoArquivo = '';
   mensagens = new Array<String>()
+
   clienteEdit: Cliente;
 
   constructor(private http: HttpClient) { }
 
   addClienteEdicao(cliente: Cliente) {
+
     this.clienteEdit = cliente;
     this.removeCliente(cliente);
 
@@ -48,6 +51,7 @@ export class ClienteService {
       listaContatos: contatos,
       mensagem: this.mensagens,
       temArquivo: this.flagArquivos,
+      nomeArquivo:this.nomeDoArquivo
     }
     this.http.post(environment.API_URL + '/enviarMensagem', object).subscribe();
   }
