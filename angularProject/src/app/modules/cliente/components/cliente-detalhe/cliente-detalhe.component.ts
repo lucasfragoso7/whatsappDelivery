@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Cliente } from './../../models/cliente.model';
 import { ClienteService } from './../../services/cliente.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -9,13 +9,19 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
   templateUrl: './cliente-detalhe.component.html',
   styleUrls: ['./cliente-detalhe.component.css']
 })
-export class ClienteDetalheComponent implements OnInit {
+export class ClienteDetalheComponent implements OnInit, AfterViewInit {
+
   contatosForm: FormGroup;
 
   constructor(private fb: FormBuilder, private service: ClienteService, private router: Router) {
     this.createForm();
   }
-
+  ngAfterViewInit(): void {
+    if (this.service.existsClienteEdit()) {
+      let cliente: Cliente = this.service.clienteEdit;
+      this.carregarForm(cliente);
+    }
+  }
   createForm() {
     this.contatosForm = this.fb.group({
       nome: new FormControl('', [Validators.required]),
@@ -66,12 +72,6 @@ export class ClienteDetalheComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.service.existsClienteEdit()) {
-      let cliente: Cliente = this.service.clienteEdit;
-      this.carregarForm(cliente);
-    }
-
-
   }
 
   carregarForm(cliente: Cliente) {

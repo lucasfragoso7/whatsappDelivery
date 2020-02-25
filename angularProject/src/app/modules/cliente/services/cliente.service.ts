@@ -34,7 +34,7 @@ export class ClienteService {
   }
 
   existsClienteEdit(): boolean {
-    return this.clienteEdit !== null;
+    return this.clienteEdit != null;
   }
 
 
