@@ -5,8 +5,10 @@ from flask import Flask, request
 import json
 import random
 import os
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 global contatos
 
