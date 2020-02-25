@@ -20,7 +20,7 @@
           *ngFor="let cliente of clientes | paginate: { itemsPerPage: contador, currentPage: paginaAtual };">
           <td>{{cliente.nome}}</td>
           <td>{{cliente.cidade}}</td>
-          <td>{{cliente.numero}}</td>
+          <td>{{cliente.telefone}}</td>
           <td>{{cliente.email }}</td>
           <td>
             <button class="button-remove" mat-mini-fab color="warn" type="submit" (click)='remove(cliente)'>

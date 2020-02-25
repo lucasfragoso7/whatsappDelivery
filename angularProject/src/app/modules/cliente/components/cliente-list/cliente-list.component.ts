@@ -17,7 +17,7 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
 
   clientes = new Array<Cliente>();
   pag = 1;
-  contador = 5;
+  contador = 150;
   flagEnviarContatos:boolean = true;
 
   constructor(private router: Router, private service: ClienteService, public dialog: MatDialog) { }
@@ -77,7 +77,7 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
     this.clientes.forEach((element: Cliente, index) => {
       if (index > (this.pag - 1) * this.contador && index < this.pag * this.contador - 1) {
 
-        contatos.push(element.numero);
+        contatos.push(element.telefone);
       }
     })
     return contatos;
