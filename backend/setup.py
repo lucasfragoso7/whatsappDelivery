@@ -3,7 +3,7 @@ setup(
     name = "servidorMoveZap",
     version = "1.0.0",
     options = {"build_exe": {
-        'packages': ["selenium","time","sqlite3","flask","json","random","os"],
+        'packages': ["selenium","time","sqlite3","flask","json","random","os","flask_cors"],
         'include_msvcr': True,
     }},
       executables = [Executable(
