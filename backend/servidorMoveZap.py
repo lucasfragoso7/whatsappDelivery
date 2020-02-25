@@ -15,7 +15,7 @@ def salvarArquivos():
     content = request.json
     connBd = sqlite3.connect('C:/bancoDeDados.db')
     nomeArquivo = content["nomeArquivo"]
-    arquivo = open(nomeArquivo)
+    arquivo = open("C:/" + nomeArquivo)
     arquivo = json.load(arquivo)
     for contato in arquivo:
         salvarNovoContato(contato,connBd)
