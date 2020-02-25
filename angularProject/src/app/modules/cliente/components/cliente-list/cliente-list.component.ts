@@ -1,3 +1,4 @@
+import { ImportarAquivosDialogComponent } from './../importar-aquivos-dialog/importar-aquivos-dialog.component';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
@@ -83,6 +84,20 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
       }
     })
     return contatos;
+  }
+
+  importarArquivos(){
+    let dialogRef = this.dialog.open(ImportarAquivosDialogComponent, {
+      maxWidth: '50%',
+      maxHeight: '40%',
+      disableClose: true
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.service.importarArquivos(result).subscribe(res=>{ this.carregarClientes()});
+    });
+
   }
   inciarWhatsApp() {
     this.flagEnviarContatos = false;
