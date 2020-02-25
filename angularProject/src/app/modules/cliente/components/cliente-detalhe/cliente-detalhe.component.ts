@@ -35,8 +35,9 @@ export class ClienteDetalheComponent implements OnInit, AfterViewInit {
   onClickSubmit() {
     if (this.contatosForm.valid) {
       let cliente: Cliente = this.MontarCliente();
-      this.service.setCliente(cliente).subscribe()
-      this.router.navigateByUrl('/home')
+      this.service.setCliente(cliente).subscribe(
+        res => this.router.navigateByUrl('/home')
+      )
     }
 
   }
@@ -82,6 +83,8 @@ export class ClienteDetalheComponent implements OnInit, AfterViewInit {
 
 
   }
-
+  voltar(){
+    this.router.navigateByUrl('/home')
+  }
 }
 

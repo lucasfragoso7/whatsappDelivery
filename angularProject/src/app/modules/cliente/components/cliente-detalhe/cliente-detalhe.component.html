@@ -8,7 +8,8 @@
     <br />
     <input class="form-control" type="text" name="telefone" placeholder="telefone" formControlName="telefone" #telefone>
     <br />
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-danger" (click)="voltar()">VOLTAR</button>
       <input type="submit" value="SALVAR " class="btn btn-success" (click)="onClickSubmit()">
     </div>
   </form>
