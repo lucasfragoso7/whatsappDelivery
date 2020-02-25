@@ -20,7 +20,7 @@
           *ngFor="let cliente of clientes | paginate: { itemsPerPage: contador, currentPage: paginaAtual };">
           <td>{{cliente.nome}}</td>
           <td>{{cliente.cidade}}</td>
-          <td>{{cliente.numero}}</td>
+          <td>{{cliente.telefone}}</td>
           <td>{{cliente.email }}</td>
           <td>
             <button class="button-remove" mat-mini-fab color="warn" type="submit" (click)='remove(cliente)'>
@@ -36,7 +36,8 @@
     </table>
   </div>
   <div class="d-flex justify-content-between">
-    <button mat-flat-button color="primary"(click)="inciarWhatsApp()" [disabled]="!flagEnviarContatos">INICIAR WHATSAPPWEB</button>
+    <button mat-flat-button color="primary" (click)="inciarWhatsApp()" [disabled]="!flagEnviarContatos">INICIAR
+      WHATSAPPWEB</button>
 
     <button class="btn btn-success" type="submit" (click)="enviar()" [disabled]="flagEnviarContatos"> ENVIAR</button>
   </div>

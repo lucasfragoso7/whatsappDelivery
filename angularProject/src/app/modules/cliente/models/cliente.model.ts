@@ -1,8 +1,7 @@
 export class Cliente {
   id?: String;
-  select?: boolean = false;
   nome: String;
   email: string;
-  numero: string;
+  telefone: string;
   cidade: string;
 }
