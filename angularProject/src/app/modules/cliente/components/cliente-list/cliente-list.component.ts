@@ -18,7 +18,7 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
   clientes = new Array<Cliente>();
   pag = 1;
   contador = 150;
-  flagEnviarContatos:boolean = true;
+  flagEnviarContatos: boolean = true;
 
   constructor(private router: Router, private service: ClienteService, public dialog: MatDialog) { }
 
@@ -37,7 +37,7 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
   }
 
   remove(cliente: Cliente) {
-    this.service.removeCliente(cliente);
+    this.service.removeCliente(cliente).subscribe();
     this.carregarClientes()
   }
 

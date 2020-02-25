@@ -24,13 +24,13 @@ export class ClienteService {
   }
 
   removeCliente(cliente: Cliente) {
-    this.http.delete<Cliente[]>(environment.API_URL + '/apagarContato' + "/" + cliente.id);
+    return this.http.delete<Cliente[]>(environment.API_URL + '/apagarContato' + "/" + cliente.id);
 
   }
 
   setCliente(cliente: Cliente) {
     this.clienteEdit = null;
-    this.http.post<Cliente[]>(environment.API_URL + '/salvarContato ', cliente);
+    return this.http.post<Cliente[]>(environment.API_URL + '/salvarContato ', cliente);
   }
 
   existsClienteEdit(): boolean {

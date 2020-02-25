@@ -28,23 +28,30 @@ export class ClienteDetalheComponent implements OnInit {
 
   onClickSubmit() {
     if (this.contatosForm.valid) {
-      let cliente: Cliente;
-      if (this.service.clienteEdit) {
-        cliente = this.editCliente();
-      } else {
-        cliente = this.createCliente();
-      }
-      this.service.setCliente(cliente);
+      let cliente: Cliente = this.MontarCliente();
+      this.service.setCliente(cliente).subscribe()
       this.router.navigateByUrl('/home')
     }
 
   }
+  private MontarCliente() {
+    let cliente: Cliente;
+    if (this.service.clienteEdit) {
+      cliente = this.editCliente();
+    }
+    else {
+      cliente = this.createCliente();
+    }
+    return cliente;
+  }
+
   createCliente(): Cliente {
     let cliente: Cliente = new Cliente();
 
     cliente.email = this.contatosForm.controls.email.value;
     cliente.nome = this.contatosForm.controls.nome.value;
     cliente.telefone = this.contatosForm.controls.telefone.value;
+    cliente.cidade = this.contatosForm.controls.cidade.value;
     return cliente;
   }
 
