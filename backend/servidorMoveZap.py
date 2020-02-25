@@ -13,7 +13,7 @@ CORS(app)
 @app.route("/salvarArquivos", methods=['POST'])
 def salvarArquivos():
     content = request.json
-    connBd = sqlite3.connect('bancoDeDados.db')
+    connBd = sqlite3.connect('C:/bancoDeDados.db')
     nomeArquivo = content["nomeArquivo"]
     arquivo = open(nomeArquivo)
     arquivo = json.load(arquivo)
@@ -26,7 +26,7 @@ def salvarArquivos():
 def recuperarContatos():
     listContatos = {}
     listaContatosJson = []
-    connBd = sqlite3.connect('bancoDeDados.db')
+    connBd = sqlite3.connect('C:/bancoDeDados.db')
     for contato in connBd.execute('select * from contatos'):
         listContatos = {"nome": contato[1], "id": contato[0],
                         "telefone": contato[2],
@@ -43,7 +43,7 @@ def recuperarContatos():
 def apagarContato(id):
     id = str(id)
     aspas = "'"
-    connBd = sqlite3.connect('bancoDeDados.db')
+    connBd = sqlite3.connect('C:/bancoDeDados.db')
     connBd.execute('delete from contatos where id_contato = ' + aspas + id + aspas)
     connBd.commit()
     connBd.close()
@@ -54,7 +54,7 @@ def apagarContato(id):
 
 @app.route("/salvarContato", methods=['POST'])
 def salvarContato():
-    connBd = sqlite3.connect('bancoDeDados.db')
+    connBd = sqlite3.connect('C:/bancoDeDados.db')
     content = request.json
     if('id' not in content):
        salvarNovoContato(content, connBd)
