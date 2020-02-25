@@ -12,13 +12,15 @@ import { ClienteListComponent } from './components/cliente-list/cliente-list.com
 import { MensagemDialogComponent } from './components/mensagem-dialog/mensagem-dialog.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ImportarAquivosDialogComponent } from './components/importar-aquivos-dialog/importar-aquivos-dialog.component';
 
 
 @NgModule({
   declarations: [
     ClienteDetalheComponent,
     ClienteListComponent,
-    MensagemDialogComponent
+    MensagemDialogComponent,
+    ImportarAquivosDialogComponent
   ],
   imports: [
     CommonModule,
@@ -34,6 +36,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   ],
   providers: [ClienteService, HttpClient,],
   exports: [ClienteListComponent],
-  entryComponents: [MensagemDialogComponent]
+  entryComponents: [MensagemDialogComponent, ImportarAquivosDialogComponent
+  ]
 })
 export class ClienteModule { }

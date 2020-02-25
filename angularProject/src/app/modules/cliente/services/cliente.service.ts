@@ -51,7 +51,7 @@ export class ClienteService {
       listaContatos: contatos,
       mensagem: this.mensagens,
       temArquivo: this.flagArquivos,
-      nomeArquivo:this.nomeDoArquivo
+      nomeArquivo: this.nomeDoArquivo
     }
     this.http.post(environment.API_URL + '/enviarMensagem', object).subscribe();
   }
@@ -63,6 +63,8 @@ export class ClienteService {
   setFlagArquivos(flagArquivos) {
     this.flagArquivos = flagArquivos
   }
-
+  importarArquivos(nomeDoArquivo) {
+    return this.http.post(environment.API_URL + 'salvarArquivos', { nomeDoArquivo })
+  }
 
 }
