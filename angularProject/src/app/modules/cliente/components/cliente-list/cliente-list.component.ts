@@ -49,6 +49,7 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
     let dialogRef = this.dialog.open(MensagemDialogComponent, {
       width: '70%',
       maxHeight: '60%',
+      disableClose: true
 
     });
 
