@@ -7,8 +7,7 @@ import random
 import os
 
 app = Flask(__name__)
-if __name__ == "__main__":
-    app.run()
+
 global contatos
 
 @app.route("/recuperarContatos", methods=['GET'])
@@ -137,3 +136,6 @@ def init():
         status=200,
         mimetype='application/json')
     return response
+
+if __name__ == "__main__":
+    app.run()
