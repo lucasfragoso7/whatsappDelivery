@@ -37,8 +37,9 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
   }
 
   remove(cliente: Cliente) {
-    this.service.removeCliente(cliente).subscribe();
-    this.carregarClientes()
+    this.service.removeCliente(cliente).subscribe(res => {
+      this.carregarClientes()
+    });
   }
 
   edit(cliente: Cliente) {
