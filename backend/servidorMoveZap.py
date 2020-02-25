@@ -20,9 +20,9 @@ def salvarArquivos():
     for contato in arquivo:
         salvarNovoContato(contato,connBd)
     connBd.close()
-        response = app.response_class(
-            status=200,
-            mimetype='application/json')
+    response = app.response_class(
+        status=200,
+        mimetype='application/json')
     return response
 
 
