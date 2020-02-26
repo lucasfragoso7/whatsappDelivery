@@ -118,7 +118,7 @@ def enviarMensagens():
             try:
                 chat_box = driver.find_element_by_xpath(f"//div[@title='Anexar']")
                 chat_box.click()
-                time.sleep(1)
+                time.sleep(3)
                 anexar = driver.find_element_by_xpath(f"//input[@type='file']")
                 anexar.send_keys(os.path.abspath("" + content["nomeArquivo"]))
                 time.sleep(2)
