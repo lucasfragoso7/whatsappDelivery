@@ -15,7 +15,7 @@ def salvarArquivos():
     content = request.json
     connBd = sqlite3.connect('C:/bancoDeDados.db')
     nomeArquivo = content["nomeArquivo"]
-    arquivo = open("C:/" + nomeArquivo)
+    arquivo = open(nomeArquivo)
     arquivo = json.load(arquivo)
     for contato in arquivo:
         salvarNovoContato(contato,connBd)
@@ -120,11 +120,9 @@ def enviarMensagens():
                 chat_box.click()
                 time.sleep(3)
                 anexar = driver.find_element_by_xpath(f"//input[@type='file']")
-                anexar.send_keys(os.path.abspath("C:/" + content["nomeArquivo"]))
+                anexar.send_keys(os.path.abspath(content["nomeArquivo"]))
                 time.sleep(2)
-                botaoEnviar = driver.find_element_by_xpath(f"//div[@class='_1g8sv NOJWi']")
-                botaoEnviar.click()
-                time.sleep(2)
+                clickBotaoEnviar() 
             except:
                 continue
         try:
@@ -141,6 +139,17 @@ def enviarMensagens():
         status=200,
         mimetype='application/json')
     return response
+
+
+def clickBotaoEnviar():
+    try:
+        print("tentou")
+        botaoEnviar = driver.find_element_by_xpath(f"//div[@class='_1g8sv NOJWi']")
+        botaoEnviar.click()
+        time.sleep(2)
+    except:
+        clickBotaoEnviar()
+
 
 @app.route("/init", methods=['GET'])
 def init():
