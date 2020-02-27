@@ -8,6 +8,7 @@ import { Cliente } from './../models/cliente.model';
   providedIn: 'root'
 })
 export class ClienteService {
+  flagWhatsApp = true;
   flagArquivos = false;
   nomeDoArquivo = '';
   mensagens = new Array<String>()
@@ -51,7 +52,7 @@ export class ClienteService {
       listaContatos: contatos,
       mensagem: this.mensagens,
       temArquivo: this.flagArquivos,
-      nomeArquivo:this.nomeDoArquivo
+      nomeArquivo: this.nomeDoArquivo
     }
     this.http.post(environment.API_URL + '/enviarMensagem', object).subscribe();
   }
@@ -63,6 +64,8 @@ export class ClienteService {
   setFlagArquivos(flagArquivos) {
     this.flagArquivos = flagArquivos
   }
-
+  importarArquivos(nomeArquivo) {
+    return this.http.post(environment.API_URL + '/salvarArquivos', { nomeArquivo })
+  }
 
 }
