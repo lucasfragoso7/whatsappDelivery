@@ -25,6 +25,8 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
+    this.flagEnviarContatos = this.service.flagWhatsApp;
+
   }
 
   ngAfterViewInit() {
@@ -78,15 +80,14 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
   pegarContatosMarcados() {
     let contatos = new Array<String>();
     this.clientes.forEach((element: Cliente, index) => {
-      if (index > (this.pag - 1) * this.contador && index < this.pag * this.contador - 1) {
-
+      if (index => ((this.pag - 1) * this.contador) && index <= (this.pag * this.contador - 1)) {
         contatos.push(element.telefone);
       }
     })
     return contatos;
   }
 
-  importarArquivos(){
+  importarArquivos() {
     let dialogRef = this.dialog.open(ImportarAquivosDialogComponent, {
       maxWidth: '50%',
       maxHeight: '40%',
@@ -95,13 +96,14 @@ export class ClienteListComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.service.importarArquivos(result).subscribe(res=>{ this.carregarClientes()});
+      this.service.importarArquivos(result).subscribe(res => { this.carregarClientes() });
     });
 
   }
   inciarWhatsApp() {
     this.flagEnviarContatos = false;
     this.service.iniciar();
+    this.service.flagWhatsApp = this.flagEnviarContatos;
   }
 
 }
