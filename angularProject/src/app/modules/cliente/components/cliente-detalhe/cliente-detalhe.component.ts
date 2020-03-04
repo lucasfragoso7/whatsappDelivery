@@ -83,7 +83,7 @@ export class ClienteDetalheComponent implements OnInit, AfterViewInit {
 
 
   }
-  voltar(){
+  voltar() {
     this.router.navigateByUrl('/home')
   }
 }

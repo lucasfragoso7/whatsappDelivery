@@ -1,6 +1,6 @@
-<div class="line_weight">
-  <h1 mat-dialog-title>Digite aqui as mensagens que deseja enviar.</h1>
-  <mat-dialog-content>
+<h1 mat-dialog-title>Digite aqui as mensagens que deseja enviar.</h1>
+<mat-dialog-content>
+  <div class="line_weight">
 
     <div>
       <div class="d-flex justify-content-between">
@@ -38,14 +38,14 @@
     </div>
 
     <div class="d-flex justify-content-end" [style.visibility]="checked ? 'visible' : 'hidden'">
-      <label class="example-margin"  >NOME DO ARQUIVO:</label>
+      <label class="example-margin">NOME DO ARQUIVO:</label>
       <input type="text" [(ngModel)]="nomeArquivo">
     </div>
 
-  </mat-dialog-content>
-  <div mat-dialog-actions class="d-flex justify-content-between">
-    <button class="btn btn-secondary" (click)="onNoClick()">Fechar</button>
-    <button class="btn btn-success" [mat-dialog-close]="mensagens">Salvar</button>
-  </div>
+    <div mat-dialog-actions class="d-flex justify-content-between">
+      <button class="btn btn-secondary" (click)="onNoClick()">Fechar</button>
+      <button class="btn btn-success" [mat-dialog-close]="mensagens">Salvar</button>
+    </div>
 
-</div>
+  </div>
+</mat-dialog-content>

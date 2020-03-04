@@ -1,6 +1,9 @@
 <div class="container">
   <div class="d-flex justify-content-between">
-    <button class="btn btn-success" (click)="novo()">NOVO</button>
+    <div class="d-flex justify-content-between" >
+      <button class="btn btn-success" (click)="novo()">NOVO</button>
+      <button mat-flat-button class="button-importar" color="primary" (click)="importarArquivos()">IMPORTAR</button>
+    </div>
     <button mat-flat-button color="primary" (click)="mensagem()">DEFINIR MENSAGEM</button>
   </div>
   <br>
