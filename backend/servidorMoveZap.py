@@ -126,12 +126,12 @@ def enviarMensagens():
             except:
                 continue
         try:
-            chat_box = driver.find_element_by_xpath(f"//div[@class='_3u328 copyable-text selectable-text']")
+            chat_box = driver.find_element_by_xpath(f"//div[@class='_13mgZ']")
             chat_box.click()
             chat_box.send_keys(content['mensagem'][numeroMensagem])
         except:
             continue
-        time.sleep(1)
+        time.sleep(2)
         botao_enviar = driver.find_element_by_xpath(f"//button[@class='_3M-N-']")
         botao_enviar.click()
         time.sleep(1)
