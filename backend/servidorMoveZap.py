@@ -114,15 +114,15 @@ def enviarMensagens():
         try:
             numeroMensagem = random.randint(0, (len(content['mensagem']) - 1))
             driver.get("https://web.whatsapp.com/send?phone=+55" + contatoList)
-            time.sleep(8)
+            time.sleep(15)
             if content['temArquivo']:
                 try:
                     chat_box = driver.find_element_by_xpath(f"//div[@title='Anexar']")
                     chat_box.click()
-                    time.sleep(3)
+                    time.sleep(5)
                     anexar = driver.find_element_by_xpath(f"//input[@type='file']")
                     anexar.send_keys(os.path.abspath(content["nomeArquivo"]))
-                    time.sleep(2)
+                    time.sleep(5)
                     clickBotaoEnviar()
                 except:
                     continue
@@ -132,7 +132,7 @@ def enviarMensagens():
                 chat_box.send_keys(content['mensagem'][numeroMensagem])
             except:
                 continue
-            time.sleep(2)
+            time.sleep(5)
             botao_enviar = driver.find_element_by_xpath(f"//button[@class='_3M-N-']")
             botao_enviar.click()
             time.sleep(1)
